@@ -14,16 +14,20 @@ router.post("/authentification/register", async (req, res) => {
     
 });
 
-router.post('/auth/login', async (req, res) => {
+router.post('/authentification/login', async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user || user.password !== password) {
       return res.status(401).json({ error: 'Echec identification' });
     }
     req.session.userId = user._id;
-    res.json({ message: 'Connexion réussie' });
-  });
+    res.json({ message: 'Connexion reussie' });
+});
 
+router.post('authentification/logout', (req, res) => {
+    req.session.destroy();
+    res.json({messsage: 'Deconnexion reussie'})
+})
 
 
 
