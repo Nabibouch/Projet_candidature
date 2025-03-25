@@ -67,6 +67,14 @@ router.put('application/:id', async (req, res) => {
     res.json(application);
 });
 
+// Suppression d'une candidature
+router.delete('/application/:id', async (req, res) => {
+    if (!req.session.userId)
+        return res.status(401).json({error: 'Erreur authentification'});
+await application.findByIdAndDelete(req.params.id);
+res.json({message: 'Candidature supprimée'});
+});
+
 
 
 
