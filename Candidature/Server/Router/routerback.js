@@ -33,13 +33,20 @@ router.post('authentification/logout', (req, res) => {
 })
 
 // Récupération des candidatures
-router.get('/candidatures', async (req, res) => {
+router.get('/candidature', async (req, res) => {
     if (!req.session.userId)
-        return res.status(401).json({error});
-    const applications = await application.find({userId: req.session.userId});
-    res.json(applications)
+        return res.status(401).json({error: 'Erreur authentification'});
+    const application = await application.find({userId: req.session.userId});
+    res.json(application)
 });
 
+// Ajout candidature
+router.post('/candidature', async (req, res) => {
+    if (!req.session.userId)
+        return res.status(401).json({error: 'Erreur authentification'});
+    const application = await application.create({...req.body, userId: req.session.userId});
+    res.status(401).json(application)
+})
 
 
 
