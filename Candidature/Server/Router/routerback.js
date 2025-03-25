@@ -3,7 +3,7 @@ import cors from 'cors'
 
 const router = express.Router();
 
-router.get("/authentification/register", async (req, res) => {
+router.post("/authentification/register", async (req, res) => {
     try{
         const {email, password} = req.body;
         const user = await User.create ({email, password});
@@ -13,6 +13,8 @@ router.get("/authentification/register", async (req, res) => {
     }
     
 });
+
+
 
 
 
