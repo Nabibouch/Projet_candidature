@@ -40,6 +40,17 @@ router.get('/candidature', async (req, res) => {
     res.json(application)
 });
 
+// Récupération d'une candidature spécifique
+router.get('/candidature/:id', async (req, res) => {
+    if (!req.session.userId)
+        return res.status(401).json({error: 'Erreur authentification'});
+    const application = await application.findbyId(req.params.id);
+    if (!application || application.userId.toString() !== req.session.userId) {
+        return res.status(404).json({error: 'Candidature non trouvée'});
+    }
+    res.json(application);
+});
+
 // Ajout candidature
 router.post('/candidature', async (req, res) => {
     if (!req.session.userId)
