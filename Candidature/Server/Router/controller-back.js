@@ -1,10 +1,7 @@
-import express, { application } from 'express'
-import cors from 'cors'
-
-const router = express.Router();
+// import le model
 
 // Inscription
-router.post("/authentification/register", async (req, res) => {
+export const inscription =  async (req, res) => {
     try{
         const {email, password} = req.body;
         const user = await User.create ({email, password});
@@ -12,11 +9,10 @@ router.post("/authentification/register", async (req, res) => {
     } catch (error) {
         res.status(500).json({error: 'Inscription echouée'});
     }
-    
-});
+};
 
 // Connexion
-router.post('/authentification/login', async (req, res) => {
+export const connexion = async (req, res) => {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
         if (!user || user.password !== password) {
@@ -24,20 +20,19 @@ router.post('/authentification/login', async (req, res) => {
     }
     req.session.userId = user._id;
     res.json({ message: 'Connexion reussie' });
-});
+};
 
 // Deconnexion
-router.post('authentification/logout', (req, res) => {
+export const deconnexion =  (req, res) => {
 try {
-    req.session.destroy();
     res.json({messsage: 'Deconnexion reussie'});
 } catch (error) {
     res.status(500).json({error: 'Echec deconnexion'});
 }
-});
+};
 
 // Récupération des candidatures
-router.get('/candidature', async (req, res) => {
+export const recupCandidatures = async (req, res) => {
 try{
     if (!req.session.userId)
         return res.status(401).json({error: 'Erreur authentification'});
@@ -46,10 +41,10 @@ try{
 } catch (error) {
     res.status(500).json({error: 'Erreur lors de la récuperation des candidatures'});
 }
-});
+};
 
 // Récupération d'une candidature spécifique
-router.get('/candidature/:id', async (req, res) => {
+export const recupCandidatureSpé = async (req, res) => {
 try {
     if (!req.session.userId)
         return res.status(401).json({error: 'Erreur authentification'});
@@ -61,10 +56,10 @@ try {
 } catch (error) {
     res.status(500).json({error: 'Erreur lors de la récuparation de la candidature'});
 }
-});
+};
 
 // Ajout candidature
-router.post('/candidature', async (req, res) => {
+export const addCandidature =  async (req, res) => {
 try{
     if (!req.session.userId)
         return res.status(401).json({error: 'Erreur authentification'});
@@ -73,10 +68,10 @@ try{
 } catch (error) {
     res.status(500).json({error: 'Erreur ajout candidature'});
 }
-});
+};
 
 // Mise à jour d' une candidature
-router.put('application/:id', async (req, res) => {
+export const majCandidature =  async (req, res) => {
 try {
     if (!req.session.userId)
         return res.status(401).json({error: 'Erreur authentification'});
@@ -85,10 +80,10 @@ try {
 } catch (error) {
     res.status(500).json({error: 'Echec lors de la mise à jour de la candidature'});
 }
-});
+};
 
 // Suppression d'une candidature
-router.delete('/application/:id', async (req, res) => {
+export const deleteCandidature = async (req, res) => {
     try {
         if (!req.session.userId)
             return res.status(401).json({error: 'Erreur authentification'});
@@ -97,7 +92,7 @@ router.delete('/application/:id', async (req, res) => {
     } catch(error) {
         res.status(500).json({error: 'Erreur lors de la suppression'});
     }
-});
+};
 
 
 
