@@ -10,7 +10,7 @@ router.post("/authentification/register", async (req, res) => {
         const user = await User.create ({email, password});
         res.status(201).json({message: 'Utilisateur crée'});
     } catch (error) {
-        res.status(500).json({error: 'Inscription echouée'})
+        res.status(500).json({error: 'Inscription echouée'});
     }
     
 });
@@ -29,22 +29,22 @@ router.post('/authentification/login', async (req, res) => {
 // Deconnexion
 router.post('authentification/logout', (req, res) => {
     req.session.destroy();
-    res.json({messsage: 'Deconnexion reussie'})
-})
+    res.json({messsage: 'Deconnexion reussie'});
+});
 
 // Récupération des candidatures
 router.get('/candidature', async (req, res) => {
     if (!req.session.userId)
         return res.status(401).json({error: 'Erreur authentification'});
     const application = await application.find({userId: req.session.userId});
-    res.json(application)
+    res.json(application);
 });
 
 // Récupération d'une candidature spécifique
 router.get('/candidature/:id', async (req, res) => {
     if (!req.session.userId)
         return res.status(401).json({error: 'Erreur authentification'});
-    const application = await application.findbyId(req.params.id);
+    const application = await application.findById(req.params.id);
     if (!application || application.userId.toString() !== req.session.userId) {
         return res.status(404).json({error: 'Candidature non trouvée'});
     }
@@ -56,8 +56,17 @@ router.post('/candidature', async (req, res) => {
     if (!req.session.userId)
         return res.status(401).json({error: 'Erreur authentification'});
     const application = await application.create({...req.body, userId: req.session.userId});
-    res.status(401).json(application)
-})
+    res.status(401).json(application);
+});
+
+// Mise à jour d' une candidature
+router.put('application/:id', async (req, res) => {
+    if (!req.session.userId)
+        return res.status(401).json({error: 'Erreur authentification'});
+    const application = await application.findByIdAndUpdate(req.params.id, req.body, {new : true});
+    res.json(application);
+});
+
 
 
 
