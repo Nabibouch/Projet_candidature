@@ -1,8 +1,9 @@
-import express from 'express'
+import express, { application } from 'express'
 import cors from 'cors'
 
 const router = express.Router();
 
+// Inscription
 router.post("/authentification/register", async (req, res) => {
     try{
         const {email, password} = req.body;
@@ -14,6 +15,7 @@ router.post("/authentification/register", async (req, res) => {
     
 });
 
+// Connexion
 router.post('/authentification/login', async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -24,10 +26,19 @@ router.post('/authentification/login', async (req, res) => {
     res.json({ message: 'Connexion reussie' });
 });
 
+// Deconnexion
 router.post('authentification/logout', (req, res) => {
     req.session.destroy();
     res.json({messsage: 'Deconnexion reussie'})
 })
+
+// Récupération des candidatures
+router.get('/candidatures', async (req, res) => {
+    if (!req.session.userId)
+        return res.status(401).json({error});
+    const applications = await application.find({userId: req.session.userId});
+    res.json(applications)
+});
 
 
 
