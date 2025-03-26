@@ -1,17 +1,7 @@
 import mongoose from "mongoose";
 import Joi from "joi";
 
-// const STATUS = {
-//     PENDING: "En attente",
-//     ACCEPTED: "Acceptée",
-//     REFUSED: "Refusée"
-// };
-
 const candidatureSchema = new mongoose.Schema({
-    id: {
-        type: String,
-        required: true
-    },
     company: {
         type: String,
         minLength: 2,
@@ -44,21 +34,6 @@ const candidatureSchema = new mongoose.Schema({
 const Candidature = mongoose.model("Candidature", candidatureSchema);
 
 const candidatureValidation = Joi.object({
-    id: Joi.string()
-        .required()
-        .messages({
-            ...,
-        }),
-    
-// Joi.objectId = joiObjectId(Joi);
-
-// const candidatureValidation = Joi.object({
-//     id: Joi.objectId().required().messages({
-//             "any.required": "L'ID est obligatoire.",
-//             "string.pattern.base": "L'ID doit être un ObjectId valide."
-//         }),
-
-
     company: Joi.string()
         .min(2)
         .required()
@@ -92,3 +67,5 @@ const candidatureValidation = Joi.object({
             "date.base": "La date doit être valable."
         })
 })
+
+export { Candidature, candidatureValidation }
