@@ -1,4 +1,4 @@
-import express, { application } from 'express'
+import express from 'express'
 import cors from 'cors'
 import { inscription } from './controller-back';
 import { connexion } from './controller-back';
