@@ -1,21 +1,15 @@
-import express from 'express'
-import cors from 'cors'
-import { inscription } from './controller-back';
-import { connexion } from './controller-back';
-import { deconnexion } from './controller-back';
-import { recupCandidatures } from './controller-back';
-import { recupCandidatureSpé } from './controller-back';
-import { addCandidature } from './controller-back';
-import { majCandidature } from './controller-back';
-import { deleteCandidature } from './controller-back';
+import express from 'express';
+import { inscription, connexion, deconnexion, recupCandidatureSpé, recupCandidatures, addCandidature, majCandidature, deleteCandidature } from './controller-back.js';
 
 const router = express.Router();
 
-router.post('/register', inscription)
-router.post('/connexion', connexion)
-router.post('/deconnexion', deconnexion)
-router.get('/recupCandidatures', recupCandidatures)
-router.get('/recupCandidatureSpé', recupCandidatureSpé)
-router.post('/addCandidature', addCandidature)
-router.put('/majCandidature', majCandidature)
-router.delete('/deleteCandidature', deleteCandidature)
+router.post('/register', inscription);
+router.post('/connexion', connexion);
+router.post('/deconnexion', deconnexion);
+router.get('/recupCandidatures', recupCandidatures);
+router.get('/recupCandidatureSpé', recupCandidatureSpé);
+router.post('/addCandidature', addCandidature);
+router.put('/majCandidature/:id', majCandidature);
+router.delete('/deleteCandidature/:id', deleteCandidature);
+
+export default router;
