@@ -1,6 +1,13 @@
 import express, { application } from 'express'
 import cors from 'cors'
 import { inscription } from './controller-back';
+import { connexion } from './controller-back';
+import { deconnexion } from './controller-back';
+import { recupCandidatures } from './controller-back';
+import { recupCandidatureSpé } from './controller-back';
+import { addCandidature } from './controller-back';
+import { majCandidature } from './controller-back';
+import { deleteCandidature } from './controller-back';
 
 const router = express.Router();
 
