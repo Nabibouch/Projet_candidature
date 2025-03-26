@@ -1,5 +1,5 @@
 import express from 'express';
-import { inscription, connexion, deconnexion, recupCandidatureSpé, recupCandidatures, addCandidature, majCandidature, deleteCandidature } from './controller-back.js';
+import { inscription, connexion, deconnexion, recupCandidatureSpé, recupCandidatures, addCandidature, majCandidature, deleteCandidature } from './controllerCandidature.js';
 
 const router = express.Router();
 
