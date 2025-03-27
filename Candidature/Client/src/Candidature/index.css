@@ -13,7 +13,6 @@ body {
     color: #000;
 }
 
-/* --- HEADER --- */
 header {
     background: #181818;
     color: white;
@@ -26,7 +25,6 @@ header {
     animation: fadeInDown 1s ease-out forwards;
 }
 
-/* Animation sur le logo */
 .logo {
     font-family: 'Island Moments', cursive;
     font-size: 28px;
@@ -37,7 +35,6 @@ header {
     transform: scale(1.1);
 }
 
-/* Animation sur les liens du menu */
 nav ul {
     list-style: none;
     display: flex;
@@ -71,7 +68,6 @@ nav ul li a:hover::after {
     width: 100%;
 }
 
-/* --- FORMULAIRE --- */
 main {
     display: flex;
     justify-content: center;
@@ -96,9 +92,10 @@ h1 {
     margin-bottom: 15px;
 }
 
-.input-group input {
+.input-group input,
+.input-group select {
     background: black;
-    color: white;
+    color: rgba(255, 255, 255, 0.6);
     border: 2px solid transparent;
     padding: 12px;
     font-size: 18px;
@@ -108,13 +105,34 @@ h1 {
     transition: border 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-.input-group input::placeholder {
+.input-group input::placeholder,
+.input-group select option {
     color: rgba(255, 255, 255, 0.6);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
 }
 
-.input-group input:focus {
+.input-group input:focus,
+.input-group select:focus {
     border: 2px solid white;
     transform: scale(1.05);
+}
+
+.input-group select {
+    background-color: black;
+    color: rgba(255, 255, 255, 0.6);
+    border-radius: 5px;
+    border: 2px solid transparent;
+    padding: 12px;
+    font-size: 18px;
+    width: 250px;
+    cursor: pointer;
+    transition: border 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.input-group select option {
+    background-color: black;
+    color: white;
 }
 
 p {
@@ -149,7 +167,6 @@ button:hover {
 button:active {
     transform: scale(0.95);
 }
-
 
 @keyframes fadeInDown {
     from {

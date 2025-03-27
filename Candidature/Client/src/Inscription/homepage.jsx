@@ -18,6 +18,10 @@ const Homepage = () => {
         setPassword(e.target.value);
     };
 
+    const handleConnexionClick = () => {
+        navigate('/Connexion');
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault(); 
         axios.post("http://localhost:3000/candidature/register", {email, password})
@@ -39,7 +43,13 @@ const Homepage = () => {
         <div>
             <header>
                 <div className="logo">NCIA</div>
+                <nav>
+                    <ul>
+                        <li><a href="#" onClick={handleConnexionClick}>Connexion</a></li>
+                    </ul>
+                </nav>
             </header>
+
 
             <main>
                 <div className="form-container">

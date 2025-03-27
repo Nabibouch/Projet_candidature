@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  // Import de useNavigate pour la redirection
+import { useNavigate } from 'react-router-dom'; 
 import './index.css';  
 import axios from 'axios';
 
@@ -16,6 +16,10 @@ const Connect = () => {
 
     const handleMotDePasseChange = (e) => {
         setPassword(e.target.value);
+    };
+
+    const handleInscriptionClick = () => {
+        navigate('/Inscription');
     };
 
     const handleSubmit = (e) => {
@@ -42,6 +46,11 @@ const Connect = () => {
         <div>
             <header>
                 <div className="logo">NCIA</div>
+                <nav>
+                    <ul>
+                        <li><a href="#" onClick={handleInscriptionClick}>Inscription</a></li>
+                    </ul>
+                </nav>
             </header>
 
             <main>

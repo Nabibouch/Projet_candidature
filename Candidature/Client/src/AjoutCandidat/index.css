@@ -5,16 +5,15 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    font-weight: 300;
 }
 
 body {
-    background: #fff;
-    color: #000;
+    background-color: white;
+    color: black;
 }
 
 header {
-    background: #181818;
+    background-color: #181818;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -73,18 +72,19 @@ main {
     justify-content: center;
     align-items: center;
     height: 80vh;
+    padding: 20px;
 }
 
 .upload-box {
-    background: black;
+    background-color: black;
     color: white;
-    width: 600px;
+    width: 800px;
     height: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 10px;
     border-radius: 10px;
+    padding-bottom: 10px;
     transform: scale(1);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
@@ -122,9 +122,9 @@ main {
 }
 
 button {
-    background: white;
-    border: none;
+    background-color: white;
     color: black;
+    border: none;
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
@@ -135,12 +135,11 @@ button {
 }
 
 button:hover {
-    background: black;
+    background-color: black;
     color: white;
     border: 2px solid white;
     transform: scale(1.05);
 }
-
 
 @keyframes fadeInDown {
     from {
@@ -171,6 +170,7 @@ button:hover {
     align-items: center;
     width: 100%;
 }
+
 .aplication-in-progress {
     display: flex;
     flex-direction: column;
@@ -178,13 +178,87 @@ button:hover {
     width: 100%;
     height: 190px;
     overflow: auto;
-    margin: 20px 0px;
+    margin: 20px 0;
     gap: 20px;
 }
 
+/* Candidatures style basique */
 .apply {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    width: 100%;
+    margin-bottom: 15px;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    gap: 20px;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.apply:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.apply span {
+    flex: 1;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.apply span:first-child {
+    font-weight: bold;
+}
+
+.apply span:nth-child(2) {
+    color: #f1f1f1;
+}
+
+.apply span:nth-child(3) {
+    color: #4caf50;
+    text-decoration: underline;
+}
+
+.apply span:nth-child(4) {
+    color: white;
+}
+
+/* Style pour les boutons d'action */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-button, .delete-button {
+    background-color: white;  /* Vert pour "Modifier" */
+    color: black;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.delete-button {
+    background-color: white; 
+    color: black;
+}
+
+.edit-button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.delete-button:hover {
+    background-color: #e53935;
+    transform: scale(1.05);
+}
+
+.edit-button:active, .delete-button:active {
+    transform: scale(0.98);
 }
