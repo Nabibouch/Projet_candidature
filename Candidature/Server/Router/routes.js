@@ -1,6 +1,6 @@
 import express from 'express';
-import { inscription, connexion, deconnexion, recupCandidatureSpé, recupCandidatures, addCandidature, majCandidature, deleteCandidature } from './controllerCandidature.js';
-
+import { recupCandidatureSpé, recupCandidatures, addCandidature, majCandidature, deleteCandidature } from './controllerCandidature.js';
+import { connexion, deconnexion, inscription } from "./controllerLogin.js";
 const router = express.Router();
 
 router.post('/register', inscription);

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';  // Import de useNavigate pour la redirection
 import './index.css';  
+import axios from 'axios';
 
 const Connect = () => {
     const [email, setEmail] = useState('');
-    const [motDePasse, setMotDePasse] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     
     const navigate = useNavigate();
@@ -14,23 +15,27 @@ const Connect = () => {
     };
 
     const handleMotDePasseChange = (e) => {
-        setMotDePasse(e.target.value);
+        setPassword(e.target.value);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();  
-
-        if (!email || !motDePasse) {
+        
+        if (!email || !password) {
             setError('Tous les champs doivent être remplis.');
             return;
         }
-
         setError('');
+        
+        axios.post("http://localhost:3000/candidature/connexion", {email, password})
+        .then((result) => {
+            console.log(result)
+            if(result !== "ça marche pas lol") navigate('/AjoutCandidat');
+        })
+    
+        console.log('Utilisateur connecté', { email, password });
 
-
-        console.log('Utilisateur connecté', { email, motDePasse });
-
-        navigate('/AjoutCandidat');
+        
     };
 
     return (
@@ -47,7 +52,7 @@ const Connect = () => {
                             <input 
                                 type="email" 
                                 placeholder="Email*" 
-                                value={email} 
+                                name='email'
                                 onChange={handleEmailChange} 
                                 required 
                             />
@@ -57,7 +62,7 @@ const Connect = () => {
                             <input 
                                 type="password" 
                                 placeholder="Mot de passe*" 
-                                value={motDePasse} 
+                                name='password'
                                 onChange={handleMotDePasseChange} 
                                 required 
                             />

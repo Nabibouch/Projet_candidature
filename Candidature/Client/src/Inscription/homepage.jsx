@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import './index.css';  
+import axios from 'axios';
 
 const Homepage = () => {
     const [email, setEmail] = useState('');
-    const [motDePasse, setMotDePasse] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     
     const navigate = useNavigate();
@@ -14,21 +15,22 @@ const Homepage = () => {
     };
 
     const handleMotDePasseChange = (e) => {
-        setMotDePasse(e.target.value);
+        setPassword(e.target.value);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault(); 
+        axios.post("http://localhost:3000/candidature/register", {email, password})
 
     
-        if (!email || !motDePasse) {
+        if (!email || !password) {
             setError('Tous les champs doivent être remplis.');
             return;
         }
 
         setError('');
 
-        console.log('Formulaire soumis', { email, motDePasse });
+        console.log('Formulaire soumis', { email, password });
 
         navigate('/AjoutCandidat');
     };
@@ -46,8 +48,9 @@ const Homepage = () => {
                         <div className="input-group">
                             <input 
                                 type="email" 
-                                placeholder="Email*" 
-                                value={email} 
+                                placeholder="Email*"
+                                name="email" 
+                                // value={email} 
                                 onChange={handleEmailChange} 
                                 required 
                             />
@@ -56,15 +59,16 @@ const Homepage = () => {
                         <div className="input-group">
                             <input 
                                 type="password" 
-                                placeholder="Mot de passe*" 
-                                value={motDePasse} 
+                                placeholder="Mot de passe*"
+                                name="password" 
+                                // value={password} 
                                 onChange={handleMotDePasseChange} 
                                 required 
                             />
                         </div>
                 
                         {error && <p style={{ color: 'red' }}>{error}</p>} 
-                        <button type="submit">Envoyer</button>
+                        <button type="submit" name=''>Envoyer</button>
                     </form>
                 </div>
             </main>

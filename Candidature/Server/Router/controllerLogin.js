@@ -1,10 +1,10 @@
-import { Candidature } from "../models/modelLogin.js";
+import { Login } from "../models/modelLogin.js";
 
 // Inscription
 export const inscription =  async (req, res) => {
     try{
         const {email, password} = req.body;
-        const user = await Candidature.create ({email, password});
+        const user = await Login.create ({email, password});
         res.status(201).json({message: 'Utilisateur crée'});
     } catch (error) {
         res.status(500).json({error:error.message});
@@ -14,11 +14,11 @@ export const inscription =  async (req, res) => {
 // Connexion
 export const connexion = async (req, res) => {
         const { email, password } = req.body;
-        const user = await Candidature.findOne({ email });
+        const user = await Login.findOne({ email });
         if (!user || user.password !== password) {
-            return res.status(401).json({ error: error.message });
+            return res.status(401).json("ça marche pas lol");
     }
-    req.session.userId = Candidature._id;
+    // req.session.userId = Login._id;
     res.json({ message: 'Connexion reussie' });
 };
 
