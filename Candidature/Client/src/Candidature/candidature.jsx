@@ -1,34 +1,38 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';  // Import du hook useNavigate pour la redirection
 import './index.css';  
+import axios from 'axios';
 
 const Candidature = () => {
-    const [entreprise, setEntreprise] = useState('');
-    const [offre, setOffre] = useState('');
-    const [typeContrat, setTypeContrat] = useState('');
-    const [dateCandidature, setDateCandidature] = useState('');
-    const [statutCandidature, setStatutCandidature] = useState('');
-    const [plateformeCandidature, setPlateformeCandidature] = useState('');
+    const [company, setCompany] = useState('');
+    const [post, setPost] = useState('');
+    const [date, setDate] = useState('');
+    const [status, setStatus] = useState('');
+    const [link, setlink] = useState('');
     const [error, setError] = useState('');
     
     const navigate = useNavigate();
 
-    const handleEntrepriseChange = (e) => setEntreprise(e.target.value);
-    const handleOffreChange = (e) => setOffre(e.target.value);
-    const handleTypeContratChange = (e) => setTypeContrat(e.target.value);
-    const handleDateCandidatureChange = (e) => setDateCandidature(e.target.value);
-    const handleStatutCandidatureChange = (e) => setStatutCandidature(e.target.value);
-    const handlePlateformeCandidatureChange = (e) => setPlateformeCandidature(e.target.value);
+    const handleEntrepriseChange = (e) => setCompany(e.target.value);
+    const handleOffreChange = (e) => setPost(e.target.value);
+    const handleDateCandidatureChange = (e) => setDate(e.target.value);
+    const handleStatutCandidatureChange = (e) => setStatus(e.target.value);
+    const handlePlateformeCandidatureChange = (e) => setlink(e.target.value);
 
     const handleSubmit = (e) => {
         e.preventDefault();  
 
-        if (!entreprise || !offre || !typeContrat || !dateCandidature || !statutCandidature || !plateformeCandidature) {
+        if (!company || !post || !date || !status|| !link) {
             setError('Tous les champs doivent être remplis.');
             return;
         }
 
         setError('');
+
+        axios.post("http://localhost:3000/candidature/addCandidature", {company, post, link, status, date})
+        .then((result) => (
+            console.log(result)
+        ))
 
 
         navigate('/AjoutCandidat');
@@ -61,30 +65,23 @@ const Candidature = () => {
                             <input 
                                 type="text" 
                                 placeholder="Entreprise*" 
-                                value={entreprise} 
+                                name='company'
                                 onChange={handleEntrepriseChange} 
                                 required 
                             />
                             <input 
                                 type="text" 
                                 placeholder="Offre*" 
-                                value={offre} 
+                                name='post' 
                                 onChange={handleOffreChange} 
                                 required 
                             />
                         </div>
                         <div className="input-group">
                             <input 
-                                type="text" 
-                                placeholder="Type de contrat*" 
-                                value={typeContrat} 
-                                onChange={handleTypeContratChange} 
-                                required 
-                            />
-                            <input 
-                                type="text" 
+                                type="date" 
                                 placeholder="Date de candidature*" 
-                                value={dateCandidature} 
+                                name='date'
                                 onChange={handleDateCandidatureChange} 
                                 required 
                             />
@@ -93,14 +90,14 @@ const Candidature = () => {
                             <input 
                                 type="text" 
                                 placeholder="Statut de candidature*" 
-                                value={statutCandidature} 
+                                name='status'
                                 onChange={handleStatutCandidatureChange} 
                                 required 
                             />
                             <input 
                                 type="url" 
                                 placeholder="Lien*" 
-                                value={plateformeCandidature} 
+                                name='link'
                                 onChange={handlePlateformeCandidatureChange} 
                                 required 
                             />
