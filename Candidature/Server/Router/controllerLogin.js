@@ -29,4 +29,17 @@ try {
 } catch (error) {
     res.status(500).json({error:error.message});
 }
+}; 
+
+// Session 
+export const session = async (req, res) => {
+    try {
+        const user = await Candidature.findById(req.session.userId).select("-password");
+        if (!user) {
+            return res.status(404).json({error: "Utilisateurs non trouvé"});
+        }
+        res.json({message: "Utilisateur authentifié", user});
+    } catch (error) {
+        res.status(500).json({error:error.message});
+    }
 };
