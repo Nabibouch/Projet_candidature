@@ -4,11 +4,11 @@ import './index.css';
 import axios from 'axios';
 
 const Candidature = () => {
-    const [entreprise, setEntreprise] = useState('');
-    const [offre, setOffre] = useState('');
-    const [dateCandidature, setDateCandidature] = useState('');
-    const [statutCandidature, setStatutCandidature] = useState('');
-    const [plateformeCandidature, setPlateformeCandidature] = useState('');
+    const [company, setEntreprise] = useState('');
+    const [post, setOffre] = useState('');
+    const [date, setDateCandidature] = useState('');
+    const [status, setStatutCandidature] = useState('');
+    const [link, setPlateformeCandidature] = useState('');
     const [error, setError] = useState('');
     
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Candidature = () => {
     const handleSubmit = (e) => {
         e.preventDefault();  
 
-        if (!entreprise || !offre || !dateCandidature || !statutCandidature || !plateformeCandidature) {
+        if (!company || !post || !date || !status || !link) {
             setError('Tous les champs doivent être remplis.');
             return;
         }
@@ -31,11 +31,11 @@ const Candidature = () => {
 
         // J'ai adapté les noms de variables à mon code
         axios.post("http://localhost:3000/candidature/addCandidature", {
-            entreprise, 
-            offre, 
-            plateformeCandidature: plateformeCandidature, 
-            statutCandidature: statutCandidature, 
-            dateCandidature: dateCandidature
+            company, 
+            post, 
+            link, 
+            status,
+            date,
         })
         .then((result) => {
             console.log(result);
@@ -74,14 +74,14 @@ const Candidature = () => {
                         <div className="input-group">
                             <input 
                                 type="text" 
-                                name="entreprise"
+                                name="company"
                                 placeholder="Entreprise*" 
                                 onChange={handleEntrepriseChange} 
                                 required 
                             />
                             <input 
                                 type="text" 
-                                name="offre" 
+                                name="post" 
                                 placeholder="Offre*" 
                                 onChange={handleOffreChange} 
                                 required 
@@ -90,7 +90,7 @@ const Candidature = () => {
                         <div className="input-group">
                             <input 
                                 type="date" 
-                                name="dateCandidature" 
+                                name="date" 
                                 placeholder="Date de candidature*" 
                                 onChange={handleDateCandidatureChange} 
                                 required 
@@ -98,8 +98,7 @@ const Candidature = () => {
                         </div>
                         <div className="input-group">
                             <select 
-                                name="statutCandidature"
-                                value={statutCandidature} 
+                                name="status"
                                 onChange={handleStatutCandidatureChange} 
                                 required
                             >
@@ -110,7 +109,7 @@ const Candidature = () => {
                             </select>
                             <input 
                                 type="url" 
-                                name="plateformeCandidature" 
+                                name="link" 
                                 placeholder="Lien*" 
                                 onChange={handlePlateformeCandidatureChange} 
                                 required 

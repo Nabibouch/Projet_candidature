@@ -10,6 +10,7 @@ const App = () => {
   const [nbCandidatureAccepté, setNbCandidatureAccepté] = useState("");
   const [nbCandidatureRefusé, setNbCandidatureRefusé] = useState("");
   const [nbCandidatureEnAttente, setNbCandidatureEnAttente] = useState("");
+  const [nbCandidature, setNbCandidature] = useState("");
 
   useEffect(() => {
     
@@ -36,8 +37,9 @@ const App = () => {
     nbcandidature("En attente", setNbCandidatureEnAttente);
     nbcandidature("Refusée", setNbCandidatureRefusé);
     nbcandidature("Acceptée", setNbCandidatureAccepté);
+    nbcandidature("", setNbCandidature);
     fetchpost();
-  }, []);
+  }, [candidature]);
 
 
   const navigate = useNavigate();
@@ -117,7 +119,7 @@ const App = () => {
           </div>
         </div>
         <div className='total-section'>
-        <span>nombre de candidature : </span>
+        <span>nombre de candidature : {nbCandidature.total} </span>
         <span>nombre de candidature en attente : {nbCandidatureEnAttente.total}</span>
         <span>nombre de candidature accepté : {nbCandidatureAccepté.total}</span>
         <span>nombre de candidature refusé : {nbCandidatureRefusé.total}</span>
