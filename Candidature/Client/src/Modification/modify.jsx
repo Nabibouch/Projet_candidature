@@ -27,15 +27,15 @@ const Modification = () => {
     const handleSubmit = (e) => {
         e.preventDefault();  
 
-        if (!company || !post || !date || !status || !link) {
-            setError('Tous les champs doivent être remplis.');
-            return;
-        }
+        // if (!company || !post || !date || !status || !link) {
+        //     setError('Tous les champs doivent être remplis.');
+        //     return;
+        // }
 
         setError('');
 
         // J'ai adapté les noms de variables à mon code
-        axios.post("http://localhost:3000/candidature/addCandidature", {
+        axios.put(`http://localhost:3000/candidature/majCandidature/${candidature_id}`, {
             company, 
             post, 
             link, 

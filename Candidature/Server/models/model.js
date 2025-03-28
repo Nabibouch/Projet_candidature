@@ -24,9 +24,9 @@ const candidatureSchema = new mongoose.Schema({
         default: "En attente"
     },
     date: {
-        type: Date,
+        type: String,
         required: true,
-        default: Date.now
+        // default: Date.now
     },
 }, 
 {
@@ -67,7 +67,13 @@ const candidatureValidation = Joi.object({
         .messages({
             "any.required": "Ce champ est obligatoire.",
             "date.base": "La date doit être valable."
-        })
+        }),
+    user_id: Joi.string()
+            .required()
+            .messages({
+                "string.empty": "Ce champ est obligatoire.",
+                "any.required": "Ce champ est obligatoire."
+            }),
 })
 
 export {Candidature, candidatureValidation};

@@ -63,7 +63,7 @@ const App = () => {
     navigate("/AjoutCandidat");
   }
 
-  const handleEdit = (id) => {
+  const handleModifyClick = (id) => {
     navigate(`/Modification/${id}`);
   }
 
@@ -81,19 +81,24 @@ const App = () => {
 
       <main className='column'>
         <div className="upload-box">
-          <div className='aplication-in-progress'>
+          <div className="aplication-in-progress">
+            <div className="table-header">
+              <span>Entreprise</span>
+              <span>Poste</span>
+              <span>Plateforme</span>
+              <span>Date</span>
+              <span>Actions</span>
+            </div>
             {candidature.map((item) => (
-              <div className='apply' key={item._id}>
+              <div className="apply" key={item._id}>
                 <span>{item.company}</span>
                 <span>{item.post}</span>
-                <span>{item.status}</span>
+                <a href={item.link}>Plateforme de candidature</a>
                 <span>{item.date}</span>
-                <a href={item.link} target='blank'>lien</a>
-
                 <div className="action-buttons">
                   <button 
                     className="edit-button" 
-                    onClick={() => handleEdit(item._id)}  //faut ajouter la logique derrière
+                    onClick={() => handleModifyClick(item._id)} 
                   >
                     <FaEdit /> 
                   </button>

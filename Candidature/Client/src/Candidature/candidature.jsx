@@ -29,7 +29,8 @@ const Candidature = () => {
 
         setError('');
 
-        // J'ai adapté les noms de variables à mon code
+        date.toString();
+
         axios.post("http://localhost:3000/candidature/addCandidature", {
             company, 
             post, 
