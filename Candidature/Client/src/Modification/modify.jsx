@@ -1,0 +1,140 @@
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';  
+import './index.css';  
+import axios from 'axios';
+
+const Modification = () => {
+    const [company, setEntreprise] = useState('');
+    const [post, setOffre] = useState('');
+    const [date, setDateCandidature] = useState('');
+    const [status, setStatutCandidature] = useState('');
+    const [link, setPlateformeCandidature] = useState('');
+    const [error, setError] = useState('');
+    const [placeholder, setPlaceholder] =useState([]);
+    
+    const navigate = useNavigate();
+
+    const handleEntrepriseChange = (e) => setEntreprise(e.target.value);
+    const handleOffreChange = (e) => setOffre(e.target.value);
+    const handleDateCandidatureChange = (e) => setDateCandidature(e.target.value);
+    const handleStatutCandidatureChange = (e) => setStatutCandidature(e.target.value);
+    const handlePlateformeCandidatureChange = (e) => setPlateformeCandidature(e.target.value);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();  
+
+        if (!company || !post || !date || !status || !link) {
+            setError('Tous les champs doivent être remplis.');
+            return;
+        }
+
+        setError('');
+
+        // J'ai adapté les noms de variables à mon code
+        axios.post("http://localhost:3000/candidature/addCandidature", {
+            company, 
+            post, 
+            link, 
+            status,
+            date,
+        })
+        .then((result) => {
+            console.log(result);
+        })
+        .catch((err) => {
+            console.error('Erreur lors de la soumission :', err);
+        });
+
+        navigate('/AjoutCandidat');
+    };
+
+    const handleMenuClick = () => {
+        navigate('/AjoutCandidat');
+    };
+    
+    const handleDeconnexionClick = () => {
+        navigate('/Connexion');
+    };
+    
+    // useEffect(() => {
+    //     const recupCandidatures = async () => {
+    //         try {
+    //             const response = await axios.get("http://localhost:3000/candidature/recupCandidatures");
+    //             setPlaceholder(response.data);
+    //         } catch (error) {
+    //             console.log(error);
+    //             }
+    //     }
+    // },[]);
+
+    return (
+        <div>
+            <header>
+                <div className="logo">NCIA</div>
+                <nav>
+                    <ul>
+                        <li><a href="#" onClick={handleMenuClick}>Menu</a></li>
+                        <li><a href="#" onClick={handleDeconnexionClick}>Déconnexion</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <div className="form-container">
+                    <h1>CANDIDATURE</h1>
+                    <form onSubmit={handleSubmit}>
+                        <div className="input-group">
+                            <input 
+                                type="text" 
+                                name="company"
+                                placeholder="Entreprise*" 
+                                onChange={handleEntrepriseChange} 
+                                required 
+                            />
+                            <input 
+                                type="text" 
+                                name="post" 
+                                placeholder="Offre*" 
+                                onChange={handleOffreChange} 
+                                required 
+                            />
+                        </div>
+                        <div className="input-group">
+                            <input 
+                                type="date" 
+                                name="date" 
+                                placeholder="Date de candidature*" 
+                                onChange={handleDateCandidatureChange} 
+                                required 
+                            />
+                        </div>
+                        <div className="input-group">
+                            <select 
+                                name="status"
+                                onChange={handleStatutCandidatureChange} 
+                                required
+                            >
+                                <option value="">Statut de candidature*</option>
+                                <option value="Acceptée">Acceptée</option>
+                                <option value="Refusée">Refusée</option>
+                                <option value="En attente">En attente</option>
+                            </select>
+                            <input 
+                                type="url" 
+                                name="link" 
+                                placeholder="Lien*" 
+                                onChange={handlePlateformeCandidatureChange} 
+                                required 
+                            />
+                        </div>
+                        {error && <p style={{ color: 'red' }}>{error}</p>}  
+                        <p>Les champs indiqués * sont obligatoires</p>
+                        <button type="submit">Envoyer</button>
+                    </form>
+                </div>
+            </main>
+        </div>
+    );
+};
+
+export default Modification;

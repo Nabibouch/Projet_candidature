@@ -9,6 +9,7 @@ import Candidature from './Candidature/candidature.jsx'
 import Homepage from './Inscription/homepage.jsx'
 import App from './AjoutCandidat/Ajout.jsx'
 import Connect from './Connexion/connect.jsx'
+import Modification from './Modification/modify.jsx'
 
 
 const Slice = () =>{
@@ -19,6 +20,7 @@ const Slice = () =>{
           <Route path="/Connexion" element ={<Connect />} />
           <Route path="/Candidature" element ={<Candidature />} />
           <Route path="/Inscription" element ={<Homepage />} />
+          <Route path="/Modification" element ={<Modification />} />
           <Route path="/" exact element ={<Connect />}/>
         </Routes>
     </Router>

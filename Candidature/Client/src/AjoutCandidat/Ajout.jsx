@@ -64,7 +64,7 @@ const App = () => {
   }
 
   const handleEdit = (id) => {
-    navigate("/AjoutCandidat")
+    navigate("/Modification")
   }
 
   return (
@@ -86,8 +86,9 @@ const App = () => {
               <div className='apply' key={item._id}>
                 <span>{item.company}</span>
                 <span>{item.post}</span>
-                <span>{item.link}</span>
+                <span>{item.status}</span>
                 <span>{item.date}</span>
+                <a href={item.link} target='blank'>lien</a>
 
                 <div className="action-buttons">
                   <button 

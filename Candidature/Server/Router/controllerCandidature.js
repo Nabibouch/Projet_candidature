@@ -14,12 +14,12 @@ try{
 };
 
 // Récupération d'une candidature spécifique
-export const recupCandidatureSpé = async (req, res) => {
+export const recupCandidatureSpe = async (req, res) => {
 try {
-    const application = await Candidature.findById(req.params.id);
-    if (!application || application.userId.toString() !== res.body) {
-        return res.status(404).json({error: error.message});
-    }
+    const { id } = req.params ;
+    
+    const application = await Candidature.findById(id);
+    
     res.json(application);
 } catch (error) {
     res.status(500).json({error: error.message});
