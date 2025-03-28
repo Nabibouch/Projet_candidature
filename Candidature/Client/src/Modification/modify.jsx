@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './index.css';  
 import axios from 'axios';
 
-const Candidature = () => {
+const Modification = () => {
     const [entreprise, setEntreprise] = useState('');
     const [offre, setOffre] = useState('');
     const [dateCandidature, setDateCandidature] = useState('');
@@ -89,7 +89,7 @@ const Candidature = () => {
                         </div>
                         <div className="input-group">
                             <input 
-                                type="date" 
+                                type="text" 
                                 name="dateCandidature" 
                                 placeholder="Date de candidature*" 
                                 onChange={handleDateCandidatureChange} 
@@ -126,4 +126,4 @@ const Candidature = () => {
     );
 };
 
-export default Candidature;
+export default Modification;

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import './index.css';
 import axios from "axios";
-import { FaTrashAlt, FaEdit } from 'react-icons/fa'; // Import des icônes 
+import { FaTrashAlt, FaEdit } from 'react-icons/fa'; // Import des icônes
 
 const App = () => {
-
   const [candidature, setCandidature] = useState([]);
 
   useEffect(() => {
@@ -35,6 +34,14 @@ const App = () => {
     navigate('/Connexion');
   };
 
+  const handleModifyClick = () => {
+    navigate('/Modification');
+  };
+
+  const handleDelete = (id) => {
+    // Ajoute la logique pour supprimer la candidature ici
+  };
+
   return (
     <div>
       <header>
@@ -49,39 +56,40 @@ const App = () => {
 
       <main>
         <div className="upload-box">
-          <div className='aplication-in-progress'>
+          <div className="aplication-in-progress">
+            <div className="table-header">
+              <span>Entreprise</span>
+              <span>Poste</span>
+              <span>Plateforme</span>
+              <span>Date</span>
+              <span>Actions</span>
+            </div>
             {candidature.map((item) => (
-              <div className='apply' key={item._id}>
+              <div className="apply" key={item._id}>
                 <span>{item.company}</span>
                 <span>{item.post}</span>
-                <span>{item.link}</span>
+                <a href={item.link}>Plateforme de candidature</a>
                 <span>{item.date}</span>
-
                 <div className="action-buttons">
                   <button 
                     className="edit-button" 
-                    onClick={() => handleEdit(item._id)}  //faut ajouter la logique derrière
+                    onClick={() => handleModifyClick(item._id)} 
                   >
-                    <FaEdit /> 
+                    <FaEdit />
                   </button>
                   <button 
                     className="delete-button" 
-                    onClick={() => handleDelete(item._id)} //faut ajouter la logique derrière
+                    onClick={() => handleDelete(item._id)} 
                   >
-                    <FaTrashAlt /> 
+                    <FaTrashAlt />
                   </button>
                 </div>
               </div>
             ))}
           </div>
-          <div className='upload-file'>
+          <div className="upload-file">
             <label htmlFor="peas" className="upload-label">
-              <span 
-                className="plus-icon" 
-                onClick={handleIconClick} 
-              >
-                +
-              </span> 
+              <span className="plus-icon" onClick={handleIconClick}>+</span>
               Ajouter une candidature
             </label>
           </div>
