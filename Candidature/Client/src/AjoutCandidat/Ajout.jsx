@@ -64,7 +64,7 @@ const App = () => {
   }
 
   const handleEdit = (id) => {
-    navigate("/Modification")
+    navigate(`/Modification/${id}`);
   }
 
   return (

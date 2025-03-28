@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';  
+import { useNavigate, useParams } from 'react-router-dom';  
 import './index.css';  
 import axios from 'axios';
 
 const Modification = () => {
+
     const [company, setEntreprise] = useState('');
     const [post, setOffre] = useState('');
     const [date, setDateCandidature] = useState('');
     const [status, setStatutCandidature] = useState('');
     const [link, setPlateformeCandidature] = useState('');
     const [error, setError] = useState('');
-    const [placeholder, setPlaceholder] =useState([]);
+    const [oldData, setPlaceholder] =useState([]);
     
     const navigate = useNavigate();
+    const candidature_id = useParams().id.replace(":", "");
+
+
 
     const handleEntrepriseChange = (e) => setEntreprise(e.target.value);
     const handleOffreChange = (e) => setOffre(e.target.value);
@@ -55,6 +59,21 @@ const Modification = () => {
     const handleDeconnexionClick = () => {
         navigate('/Connexion');
     };
+
+    useEffect(() => {
+        const recupData = async () => {
+            try {
+            const response = await axios.get(`http://localhost:3000/candidature/recupCandidatureSpe/${candidature_id}`);
+            console.log(response.data.date);
+            setPlaceholder(response.data);
+            }catch (err) {
+                console.log(err);
+                
+            }
+            
+        }
+        recupData();
+    },[]);
     
     // useEffect(() => {
     //     const recupCandidatures = async () => {
@@ -87,34 +106,34 @@ const Modification = () => {
                             <input 
                                 type="text" 
                                 name="company"
-                                placeholder="Entreprise*" 
+                                defaultValue= {oldData.company}
                                 onChange={handleEntrepriseChange} 
-                                required 
+                            
                             />
                             <input 
                                 type="text" 
                                 name="post" 
-                                placeholder="Offre*" 
+                                defaultValue= {oldData.post}
                                 onChange={handleOffreChange} 
-                                required 
+                            
                             />
                         </div>
                         <div className="input-group">
                             <input 
                                 type="date" 
                                 name="date" 
-                                placeholder="Date de candidature*" 
+                                defaultValue= {oldData.date} 
                                 onChange={handleDateCandidatureChange} 
-                                required 
+                             
                             />
                         </div>
                         <div className="input-group">
                             <select 
                                 name="status"
                                 onChange={handleStatutCandidatureChange} 
-                                required
+                            
                             >
-                                <option value="">Statut de candidature*</option>
+                                <option value="">{oldData.status}</option>
                                 <option value="Acceptée">Acceptée</option>
                                 <option value="Refusée">Refusée</option>
                                 <option value="En attente">En attente</option>
@@ -122,9 +141,9 @@ const Modification = () => {
                             <input 
                                 type="url" 
                                 name="link" 
-                                placeholder="Lien*" 
+                                defaultValue= {oldData.link} 
                                 onChange={handlePlateformeCandidatureChange} 
-                                required 
+                            
                             />
                         </div>
                         {error && <p style={{ color: 'red' }}>{error}</p>}  
