@@ -64,6 +64,7 @@ try {
     res.clearCookie("user_id")
     res.json({messsage: 'Deconnexion reussie'});
 } catch (error) {
-    res.status(500).json({error:error.message});    
-    }
-};
+
+    res.status(500).json({error:error.message});
+}
+}

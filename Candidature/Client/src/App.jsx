@@ -20,7 +20,7 @@ const Slice = () =>{
           <Route path="/Connexion" element ={<Connect />} />
           <Route path="/Candidature" element ={<Candidature />} />
           <Route path="/Inscription" element ={<Homepage />} />
-          <Route path="/Modification" element ={<Modification />} />
+          <Route path="/modification/:id" element ={<Modification />} />
           <Route path="/" exact element ={<Connect />}/>
         </Routes>
     </Router>
