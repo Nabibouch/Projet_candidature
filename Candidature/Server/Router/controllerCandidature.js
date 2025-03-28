@@ -2,7 +2,6 @@ import { Candidature } from "../models/model.js";
 
 
 
-
 // Récupération des candidatures
 export const recupCandidatures = async (req, res) => {
 try{
@@ -14,6 +13,7 @@ try{
 };
 
 // Récupération d'une candidature spécifique
+
 export const recupCandidatureSpe = async (req, res) => {
 try {
     const { id } = req.params ;
@@ -57,16 +57,6 @@ export const deleteCandidature = async (req, res) => {
     }
 };
 
-
-// Comptage des candidatures
-// export const countCandidature = async (req, res) => {
-//     try{
-//         const count = await Candidature.countDocuments(req.body)
-//         res.json({total: count});
-//     } catch(error) {
-//         res.status(500).json({error:error.message});
-//     }
-// };
 
 export const countCandidature = async (req, res) => {
     try {
