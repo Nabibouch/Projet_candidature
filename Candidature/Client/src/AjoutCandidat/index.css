@@ -78,8 +78,8 @@ main {
 .upload-box {
     background-color: black;
     color: white;
-    width: 800px;
-    height: 250px;
+    width: 850px;
+    height: 270px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -261,4 +261,16 @@ button:hover {
 
 .edit-button:active, .delete-button:active {
     transform: scale(0.98);
+}
+
+.total-section {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }

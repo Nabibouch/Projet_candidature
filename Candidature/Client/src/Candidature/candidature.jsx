@@ -89,7 +89,7 @@ const Candidature = () => {
                         </div>
                         <div className="input-group">
                             <input 
-                                type="text" 
+                                type="date" 
                                 name="dateCandidature" 
                                 placeholder="Date de candidature*" 
                                 onChange={handleDateCandidatureChange} 

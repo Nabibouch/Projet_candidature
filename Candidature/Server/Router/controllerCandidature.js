@@ -59,11 +59,23 @@ export const deleteCandidature = async (req, res) => {
 
 
 // Comptage des candidatures
+// export const countCandidature = async (req, res) => {
+//     try{
+//         const count = await Candidature.countDocuments(req.body)
+//         res.json({total: count});
+//     } catch(error) {
+//         res.status(500).json({error:error.message});
+//     }
+// };
+
 export const countCandidature = async (req, res) => {
-    try{
-        const count = await Candidature.countDocuments(req.body)
-        res.json({total: count});
-    } catch(error) {
+    try {
+        const { status } = req.query;
+        let filter = {};
+        if(status) filter.status = status;
+        const count = await Candidature.countDocuments(filter);
+        res.status(200).json({total: count});
+    } catch (error) {
         res.status(500).json({error:error.message});
     }
-};
+}

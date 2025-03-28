@@ -1,5 +1,5 @@
 import express from 'express';
-import { recupCandidatureSpé, recupCandidatures, addCandidature, majCandidature, deleteCandidature } from './controllerCandidature.js';
+import { recupCandidatureSpé, recupCandidatures, addCandidature, majCandidature, deleteCandidature, countCandidature } from './controllerCandidature.js';
 import { connexion, deconnexion, inscription } from "./controllerLogin.js";
 const router = express.Router();
 
@@ -11,5 +11,6 @@ router.get('/recupCandidatureSpé', recupCandidatureSpé);
 router.post('/addCandidature', addCandidature);
 router.put('/majCandidature/:id', majCandidature);
 router.delete('/deleteCandidature/:id', deleteCandidature);
+router.get('/compte', countCandidature);
 
 export default router;

@@ -7,8 +7,12 @@ import { FaTrashAlt, FaEdit } from 'react-icons/fa'; // Import des icônes
 const App = () => {
 
   const [candidature, setCandidature] = useState([]);
+  const [nbCandidatureAccepté, setNbCandidatureAccepté] = useState("");
+  const [nbCandidatureRefusé, setNbCandidatureRefusé] = useState("");
+  const [nbCandidatureEnAttente, setNbCandidatureEnAttente] = useState("");
 
   useEffect(() => {
+    
     const fetchpost = async () => {
       try {
         const response = await axios.get("http://localhost:3000/candidature/recupCandidatures");
@@ -18,8 +22,23 @@ const App = () => {
         console.log(error);
       }
     };
+
+    const nbcandidature = async (filtre, use_state) => {
+      try {
+        const response = await axios.get(`http://localhost:3000/candidature/compte?status=${filtre}`);
+        console.log(response.data);
+        use_state(response.data);
+      } catch (error) {
+        console.log(error);
+        
+      }
+    }
+    nbcandidature("En attente", setNbCandidatureEnAttente);
+    nbcandidature("Refusée", setNbCandidatureRefusé);
+    nbcandidature("Acceptée", setNbCandidatureAccepté);
     fetchpost();
   }, []);
+
 
   const navigate = useNavigate();
 
@@ -35,6 +54,17 @@ const App = () => {
     navigate('/Connexion');
   };
 
+  const handleDelete = (id) => {
+    const routeDelete = "http://localhost:3000/candidature/deleteCandidature/" + id;
+
+    axios.delete(routeDelete);
+    navigate("/AjoutCandidat");
+  }
+
+  const handleEdit = (id) => {
+    navigate("/AjoutCandidat")
+  }
+
   return (
     <div>
       <header>
@@ -47,7 +77,7 @@ const App = () => {
         </nav>
       </header>
 
-      <main>
+      <main className='column'>
         <div className="upload-box">
           <div className='aplication-in-progress'>
             {candidature.map((item) => (
@@ -85,6 +115,12 @@ const App = () => {
               Ajouter une candidature
             </label>
           </div>
+        </div>
+        <div className='total-section'>
+        <span>nombre de candidature : </span>
+        <span>nombre de candidature en attente : {nbCandidatureEnAttente.total}</span>
+        <span>nombre de candidature accepté : {nbCandidatureAccepté.total}</span>
+        <span>nombre de candidature refusé : {nbCandidatureRefusé.total}</span>
         </div>
       </main>
     </div>
