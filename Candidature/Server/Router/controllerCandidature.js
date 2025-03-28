@@ -1,4 +1,5 @@
-import { Candidature } from "../models/modelCandidature.js";
+import { Candidature } from "../models/model.js";
+
 
 
 // Récupération des candidatures
@@ -12,12 +13,13 @@ try{
 };
 
 // Récupération d'une candidature spécifique
-export const recupCandidatureSpé = async (req, res) => {
+
+export const recupCandidatureSpe = async (req, res) => {
 try {
-    const application = await Candidature.findById(req.params.id);
-    if (!application || application.userId.toString() !== res.body) {
-        return res.status(404).json({error: error.message});
-    }
+    const { id } = req.params ;
+    
+    const application = await Candidature.findById(id);
+    
     res.json(application);
 } catch (error) {
     res.status(500).json({error: error.message});
@@ -55,12 +57,15 @@ export const deleteCandidature = async (req, res) => {
     }
 };
 
-// Comptage des candidatures
+
 export const countCandidature = async (req, res) => {
-    try{
-        const count = await Candidature.countDocuments(req.body)
-        res.json({total: count});
-    } catch(error) {
+    try {
+        const { status } = req.query;
+        let filter = {};
+        if(status) filter.status = status;
+        const count = await Candidature.countDocuments(filter);
+        res.status(200).json({total: count});
+    } catch (error) {
         res.status(500).json({error:error.message});
     }
-};
+}
