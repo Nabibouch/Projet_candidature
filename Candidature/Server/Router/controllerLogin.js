@@ -8,6 +8,13 @@ export const inscription =  async (req, res) => {
 
         const user = await Login.create ({email, password});
         res.status(201).json({message: 'Utilisateur crée'});
+        res.cookie("userId", user._id, {
+            httpOnly: true,
+            secure: false,
+            maxAge: 24 * 60 * 60 * 1000
+        });
+
+        res.json({ message: 'Connexion reussie'});
     } catch (error) {
         res.status(500).json({error:error.message});
     }
