@@ -26,7 +26,7 @@ export const connexion = async (req, res) => {
         const { email, password } = req.body;
         const user = await Login.findOne({ email });
         if (!user || user.password !== password) {
-            return res.status(401).json("ça marche pas lol");
+            return res.status(401).json("mot de passe oublié");
         }
 
         res.cookie("userId", user._id, {
@@ -67,4 +67,13 @@ try {
 
     res.status(500).json({error:error.message});
 }
+}
+
+export const userList = async (req, res) => {
+    try {
+        const listUser = await Login.find(req.body);
+        res.status(200).json(listUser);
+    } catch (error) {
+        res.status(500).json({error:error.message});
+    }
 }

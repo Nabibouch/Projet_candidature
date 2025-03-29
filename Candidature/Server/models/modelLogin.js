@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 import Joi from "joi";
 
 const loginSchema = new mongoose.Schema({
-    "user_id": {
-        type: String,
-        required: true
-    },
+    // "user_id": {
+    //     type: String,
+    //     required: true
+    // },
     "email": {
         type: String,
         required: true,
@@ -18,7 +18,7 @@ const loginSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 6,
-        match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/, "Le mot de passe doit contenir au moins une lettre minuscule, une lettre majuscule, un chiffre et un caractère spécial."]
+        match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,;])[A-Za-z\d@$!%*?&]{6,}$/, "Le mot de passe doit contenir au moins une lettre minuscule, une lettre majuscule, un chiffre et un caractère spécial."]
     }
 });
 

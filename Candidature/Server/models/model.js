@@ -28,6 +28,10 @@ const candidatureSchema = new mongoose.Schema({
         required: true,
         // default: Date.now
     },
+    userId: {
+        type: String,
+        required: true,
+    },
 }, 
 {
     timestamps: true 

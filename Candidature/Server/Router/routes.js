@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import { recupCandidatureSpe, recupCandidatures, addCandidature, majCandidature, deleteCandidature, countCandidature } from './controllerCandidature.js';
-import { connexion, deconnexion, inscription } from "./controllerLogin.js";
+import { connexion, deconnexion, inscription, userList  } from "./controllerLogin.js";
 
 const router = express.Router();
 router.use(cookieParser());
@@ -23,6 +23,7 @@ router.post('/addCandidature', addCandidature);
 router.put('/majCandidature/:id', majCandidature);
 router.delete('/deleteCandidature/:id', deleteCandidature);
 router.get('/compte', countCandidature);
-router.get('/session/:id', session)
+router.get('/session/:id', session);
+router.get('/userList', userList);
 
 export default router;

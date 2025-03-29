@@ -26,6 +26,20 @@ try {
 }
 };
 
+// Récupération des candidatures d'un utilisateur
+
+export const recupCandidaturesUser = async (req, res) => {
+try {
+    const { userId } = req.params ;
+    
+    const application = await Candidature.findOne({userId});
+    
+    res.json(application);
+} catch (error) {
+    res.status(500).json({error: error.message});
+}
+};
+
 // Ajout candidature
 export const addCandidature =  async (req, res) => {
 try{
