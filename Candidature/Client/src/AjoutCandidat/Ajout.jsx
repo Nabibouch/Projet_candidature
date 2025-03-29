@@ -86,7 +86,7 @@ const App = () => {
               <span>Entreprise</span>
               <span>Poste</span>
               <span>Plateforme</span>
-              <span>Date</span>
+              <span>Status</span>
               <span>Actions</span>
             </div>
             {candidature.map((item) => (
@@ -94,7 +94,7 @@ const App = () => {
                 <span>{item.company}</span>
                 <span>{item.post}</span>
                 <a href={item.link}>Plateforme de candidature</a>
-                <span>{item.date}</span>
+                <span>{item.status}</span>
                 <div className="action-buttons">
                   <button 
                     className="edit-button" 

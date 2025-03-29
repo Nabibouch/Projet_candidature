@@ -64,8 +64,12 @@ const Modification = () => {
         const recupData = async () => {
             try {
             const response = await axios.get(`http://localhost:3000/candidature/recupCandidatureSpe/${candidature_id}`);
-            console.log(response.data.date);
+            console.log(response.data);
             setPlaceholder(response.data);
+            setEntreprise(response.data.company);
+            setOffre(response.data.post);
+            setDateCandidature(response.data.date);
+            setPlateformeCandidature(response.data.link);
             }catch (err) {
                 console.log(err);
                 
@@ -75,17 +79,6 @@ const Modification = () => {
         recupData();
     },[]);
     
-    // useEffect(() => {
-    //     const recupCandidatures = async () => {
-    //         try {
-    //             const response = await axios.get("http://localhost:3000/candidature/recupCandidatures");
-    //             setPlaceholder(response.data);
-    //         } catch (error) {
-    //             console.log(error);
-    //             }
-    //     }
-    // },[]);
-
     return (
         <div>
             <header>

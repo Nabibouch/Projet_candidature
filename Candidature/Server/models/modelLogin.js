@@ -25,12 +25,7 @@ const loginSchema = new mongoose.Schema({
 const Login = mongoose.model("Login", loginSchema);
 
 const loginValidation = Joi.object({
-    user_id: Joi.string()
-        .required()
-        .messages({
-            "string.empty": "Ce champ est obligatoire.",
-            "any.required": "Ce champ est obligatoire."
-        }),
+    
     email: Joi.string()
         .required()
         .email({ 

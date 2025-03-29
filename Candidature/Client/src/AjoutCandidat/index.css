@@ -101,6 +101,7 @@ main {
   padding: 10px;
   font-weight: bold;
   border-bottom: 2px solid white;
+  margin-bottom: 5px;
 }
 
 .table-header span {
@@ -250,8 +251,10 @@ main {
 }
 
 .total-section {
+    display: flex;
     margin-top: 30px;
     gap: 20px;
+    justify-content: space-between;
 }
 
 .aplication-in-progress {
