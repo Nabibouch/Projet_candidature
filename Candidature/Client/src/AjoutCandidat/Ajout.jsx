@@ -68,7 +68,13 @@ const App = () => {
     const handleDelete = (id) => {
     const routeDelete = "http://localhost:3000/candidature/deleteCandidature/" + id;
 
-    setCandidature(prevCandidatures => prevCandidatures.filter(item => item._id !== id));
+    setCandidature((prevCandidatures) => prevCandidatures.filter((item) => item._id !== id));
+    
+
+    // setNbCandidature( (prevValue) => prevValue.filter((item) => item._id !== id));
+    // setNbCandidatureEnAttente( (prevValue) => prevValue.filter((item) => item._id !== id));
+    // setNbCandidatureRefusé( (prevValue) => prevValue.filter((item) => item._id !== id));
+    // setNbCandidatureAccepté( (prevValue) => prevValue.filter((item) => item._id !== id));
 
     toast.success("Candidature supprimée avec succès !");
 
