@@ -15,6 +15,7 @@ const Modification = () => {
     
     const navigate = useNavigate();
     const candidature_id = useParams().id.replace(":", "");
+    const userId = useParams().userId.replace(":", "");
 
 
 
@@ -41,6 +42,7 @@ const Modification = () => {
             link, 
             status,
             date,
+            userId : userId
         })
         .then((result) => {
             console.log(result);
@@ -49,11 +51,11 @@ const Modification = () => {
             console.error('Erreur lors de la soumission :', err);
         });
 
-        navigate('/AjoutCandidat');
+        navigate(`/AjoutCandidat/${userId}`);
     };
 
     const handleMenuClick = () => {
-        navigate('/AjoutCandidat');
+        navigate(`/AjoutCandidat/${userId}`);
     };
     
     const handleDeconnexionClick = () => {

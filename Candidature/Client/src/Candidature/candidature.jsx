@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  
+import { useNavigate, useParams } from 'react-router-dom';  
 import './index.css';  
 import axios from 'axios';
 
@@ -12,6 +12,7 @@ const Candidature = () => {
     const [error, setError] = useState('');
     
     const navigate = useNavigate();
+    const userId = useParams().id.replace(":","");
 
     const handleEntrepriseChange = (e) => setEntreprise(e.target.value);
     const handleOffreChange = (e) => setOffre(e.target.value);
@@ -37,6 +38,7 @@ const Candidature = () => {
             link, 
             status,
             date,
+            userId: userId
         })
         .then((result) => {
             console.log(result);
@@ -45,11 +47,11 @@ const Candidature = () => {
             console.error('Erreur lors de la soumission :', err);
         });
 
-        navigate('/AjoutCandidat');
+        navigate(`/AjoutCandidat/${userId}`);
     };
 
     const handleMenuClick = () => {
-        navigate('/AjoutCandidat');
+        navigate(`/AjoutCandidat/${userId}`);
     };
     
     const handleDeconnexionClick = () => {

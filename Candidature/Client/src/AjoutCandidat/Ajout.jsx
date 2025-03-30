@@ -45,11 +45,11 @@ const App = () => {
   const navigate = useNavigate();
 
   const handleIconClick = () => {
-    navigate('/Candidature');
+    navigate(`/Candidature/${userId}`);
   };
 
   const handleMenuClick = () => {
-    navigate('/AjoutCandidat');
+    navigate(`/AjoutCandidat/${userId}`);
   };
 
   const handleDeconnexionClick = () => {
@@ -60,11 +60,10 @@ const App = () => {
     const routeDelete = "http://localhost:3000/candidature/deleteCandidature/" + id;
 
     axios.delete(routeDelete);
-    navigate("/AjoutCandidat");
   }
 
   const handleModifyClick = (id) => {
-    navigate(`/Modification/${id}`);
+    navigate(`/Modification/${id}/${userId}`);
   }
 
   return (

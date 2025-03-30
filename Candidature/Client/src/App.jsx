@@ -18,9 +18,9 @@ const Slice = () =>{
         <Routes>
           <Route path="/AjoutCandidat/:id" element ={<App />} />
           <Route path="/Connexion" element ={<Connect />} />
-          <Route path="/Candidature" element ={<Candidature />} />
+          <Route path="/Candidature/:id" element ={<Candidature />} />
           <Route path="/Inscription" element ={<Homepage />} />
-          <Route path="/modification/:id" element ={<Modification />} />
+          <Route path="/modification/:id/:userId" element ={<Modification />} />
           <Route path="/" exact element ={<Connect />}/>
         </Routes>
     </Router>
