@@ -30,9 +30,11 @@ try {
 
 export const recupCandidaturesUser = async (req, res) => {
 try {
-    const { userId } = req.params ;
-    
-    const application = await Candidature.findOne({userId});
+    const { userId } = req.query ;
+    let filter =  {};
+    if (filter) filter.userId = userId;
+
+    const application = await Candidature.find(filter);
     
     res.json(application);
 } catch (error) {

@@ -6,6 +6,7 @@ import axios from 'axios';
 const Connect = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [id, setId] = useState('');
     const [error, setError] = useState('');
     
     const navigate = useNavigate();
@@ -33,11 +34,20 @@ const Connect = () => {
         
         axios.post("http://localhost:3000/candidature/connexion", {email, password})
         .then((result) => {
-            console.log(result)
+            console.log(result);
+            const getData = async () => {
+                try {
+                    const response = await axios.get("http://localhost:3000/candidature/user?email=" + email);
+                    console.log(response.data._id);
+                    setId(response.data._id)
+                } catch (error) {
+                    console.log(error);
+                }
+            }
             if(result !== "ça marche pas lol") navigate('/AjoutCandidat');
+            getData()
         })
-    
-        console.log('Utilisateur connecté', { email, password });
+
 
         
     };

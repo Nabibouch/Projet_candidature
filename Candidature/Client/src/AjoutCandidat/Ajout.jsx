@@ -17,7 +17,6 @@ const App = () => {
     const fetchpost = async () => {
       try {
         const response = await axios.get("http://localhost:3000/candidature/recupCandidatures");
-        console.log(response.data);
         setCandidature(response.data);
       } catch (error) {
         console.log(error);
@@ -27,7 +26,6 @@ const App = () => {
     const nbcandidature = async (filtre, use_state) => {
       try {
         const response = await axios.get(`http://localhost:3000/candidature/compte?status=${filtre}`);
-        console.log(response.data);
         use_state(response.data);
       } catch (error) {
         console.log(error);
