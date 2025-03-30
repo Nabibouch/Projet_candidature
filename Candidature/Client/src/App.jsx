@@ -16,7 +16,7 @@ const Slice = () =>{
   return (
     <Router>       
         <Routes>
-          <Route path="/AjoutCandidat" element ={<App />} />
+          <Route path="/AjoutCandidat/:id" element ={<App />} />
           <Route path="/Connexion" element ={<Connect />} />
           <Route path="/Candidature" element ={<Candidature />} />
           <Route path="/Inscription" element ={<Homepage />} />

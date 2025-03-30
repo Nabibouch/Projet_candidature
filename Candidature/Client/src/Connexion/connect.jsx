@@ -23,7 +23,7 @@ const Connect = () => {
         navigate('/Inscription');
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();  
         
         if (!email || !password) {
@@ -32,21 +32,28 @@ const Connect = () => {
         }
         setError('');
         
-        axios.post("http://localhost:3000/candidature/connexion", {email, password})
-        .then((result) => {
-            console.log(result);
-            const getData = async () => {
-                try {
-                    const response = await axios.get("http://localhost:3000/candidature/user?email=" + email);
-                    console.log(response.data._id);
-                    setId(response.data._id)
-                } catch (error) {
-                    console.log(error);
-                }
+        try {
+            const auth  = await axios.post("http://localhost:3000/candidature/connexion", {email, password})
+            
+            if(auth == "ça marche pas lol") {
+                setError("erreur authentification")
+                return ;
             }
-            if(result !== "ça marche pas lol") navigate('/AjoutCandidat');
-            getData()
-        })
+
+            const response = await axios.get(`http://localhost:3000/candidature/user?email=${email}`);
+            const userId = response.data._id;
+            
+            if(userId) {
+                navigate(`/AjoutCandidat/${userId}`);
+            }
+            else {
+                setError("utilisateur introuvable")
+            }
+
+            
+        } catch (error) {
+            console.log(error);
+        }
 
 
         

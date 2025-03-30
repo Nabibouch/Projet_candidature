@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate, useParams } from 'react-router-dom'; 
 import './index.css';
 import axios from "axios";
 import { FaTrashAlt, FaEdit } from 'react-icons/fa'; // Import des icônes 
 
 const App = () => {
-
+  
   const [candidature, setCandidature] = useState([]);
   const [nbCandidatureAccepté, setNbCandidatureAccepté] = useState("");
   const [nbCandidatureRefusé, setNbCandidatureRefusé] = useState("");
   const [nbCandidatureEnAttente, setNbCandidatureEnAttente] = useState("");
   const [nbCandidature, setNbCandidature] = useState("");
-
+  
+  const userId = useParams().id.replace(":","");
+  
   useEffect(() => {
     
     const fetchpost = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/candidature/recupCandidatures");
+        const response = await axios.get(`http://localhost:3000/candidature/dashboard?userId=${userId}`);
         setCandidature(response.data);
       } catch (error) {
         console.log(error);
