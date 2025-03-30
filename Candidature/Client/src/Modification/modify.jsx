@@ -72,6 +72,7 @@ const Modification = () => {
             setOffre(response.data.post);
             setDateCandidature(response.data.date);
             setPlateformeCandidature(response.data.link);
+            setStatutCandidature(response.data.status);
             }catch (err) {
                 console.log(err);
                 
@@ -125,10 +126,11 @@ const Modification = () => {
                         <div className="input-group">
                             <select 
                                 name="status"
+                                defaultValue={oldData.status}
                                 onChange={handleStatutCandidatureChange} 
                             
                             >
-                                <option value="">{oldData.status}</option>
+                                <option defaultValue="">{oldData.status}</option>
                                 <option value="Acceptée">Acceptée</option>
                                 <option value="Refusée">Refusée</option>
                                 <option value="En attente">En attente</option>

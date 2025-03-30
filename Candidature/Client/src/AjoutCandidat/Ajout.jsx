@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import './index.css';
 import axios from "axios";
 import { FaTrashAlt, FaEdit } from 'react-icons/fa'; // Import des icônes 
+import toast from 'react-hot-toast';
 
 const App = () => {
   
@@ -11,6 +12,7 @@ const App = () => {
   const [nbCandidatureRefusé, setNbCandidatureRefusé] = useState("");
   const [nbCandidatureEnAttente, setNbCandidatureEnAttente] = useState("");
   const [nbCandidature, setNbCandidature] = useState("");
+  const [deadline, setDeadline] = useState("");
   
   const userId = useParams().id.replace(":","");
   
@@ -39,7 +41,13 @@ const App = () => {
     nbcandidature("Acceptée", setNbCandidatureAccepté);
     nbcandidature("", setNbCandidature);
     fetchpost();
-  }, [candidature]);
+
+    
+
+    
+
+
+  }, []);
 
 
   const navigate = useNavigate();
@@ -56,16 +64,46 @@ const App = () => {
     navigate('/Connexion');
   };
 
-  const handleDelete = (id) => {
+
+    const handleDelete = (id) => {
     const routeDelete = "http://localhost:3000/candidature/deleteCandidature/" + id;
+
+    setCandidature(prevCandidatures => prevCandidatures.filter(item => item._id !== id));
+
+    toast.success("Candidature supprimée avec succès !");
 
     axios.delete(routeDelete);
   }
+
+  
+  
 
   const handleModifyClick = (id) => {
     navigate(`/Modification/${id}/${userId}`);
   }
 
+  useEffect(() => {
+
+    candidature.forEach((item) => {
+    const today = new Date().toISOString().split('T')[0];
+    if (item.date === today) {
+      toast.error(`La candidature chez ${item.company} a besoin d'une relance !`);
+    }
+  });
+
+  },[candidature])
+  const getBackgroundColor = (item) => {
+    const today = new Date().toISOString().split('T')[0];
+    if (item.date === today) {
+      
+      return "#ca3743d5";
+      
+    } 
+
+  return "#333";
+  };
+
+  
   return (
     <div>
       <header>
@@ -89,7 +127,7 @@ const App = () => {
               <span>Actions</span>
             </div>
             {candidature.map((item) => (
-              <div className="apply" key={item._id}>
+              <div className="apply" key={item._id} style={{ backgroundColor: getBackgroundColor(item) }} >
                 <span>{item.company}</span>
                 <span>{item.post}</span>
                 <a href={item.link}>Plateforme de candidature</a>

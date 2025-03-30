@@ -1,20 +1,23 @@
-import React from 'react'
-import ReactDom from 'react-dom'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import './AjoutCandidat/index.css'
-import './Candidature/index.css'
-import './Connexion/index.css'
-import './Inscription/index.css'
-import Candidature from './Candidature/candidature.jsx'
-import Homepage from './Inscription/homepage.jsx'
-import App from './AjoutCandidat/Ajout.jsx'
-import Connect from './Connexion/connect.jsx'
-import Modification from './Modification/modify.jsx'
+import React from 'react';
+import ReactDom from 'react-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import './AjoutCandidat/index.css';
+import './Candidature/index.css';
+import './Connexion/index.css';
+import './Inscription/index.css';
+import Candidature from './Candidature/candidature.jsx';
+import Homepage from './Inscription/homepage.jsx';
+import App from './AjoutCandidat/Ajout.jsx';
+import Connect from './Connexion/connect.jsx';
+import Modification from './Modification/modify.jsx';
+
 
 
 const Slice = () =>{
   return (
-    <Router>       
+    <Router>
+      <Toaster position='bottom-right' toastOptions={{duration: 3000}} />       
         <Routes>
           <Route path="/AjoutCandidat/:id" element ={<App />} />
           <Route path="/Connexion" element ={<Connect />} />

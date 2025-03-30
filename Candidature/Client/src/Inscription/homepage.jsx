@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import './index.css';  
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const Homepage = () => {
     const [email, setEmail] = useState('');
@@ -22,21 +23,37 @@ const Homepage = () => {
         navigate('/Connexion');
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault(); 
-        axios.post("http://localhost:3000/candidature/register", {email, password})
 
-    
-        if (!email || !password) {
-            setError('Tous les champs doivent être remplis.');
+        if(!email || !password){
+            setError('Tous les champs doivent être remplis');
+            toast.error(error);
             return;
         }
 
-        setError('');
+        try {
+            const result = await axios.post("http://localhost:3000/candidature/register", {email, password})
+            if (result.data.error) {
+                toast.error(result.data.error)
+            }
 
-        console.log('Formulaire soumis', { email, password });
+        
+            if (!email || !password) {
+                setError('Tous les champs doivent être remplis.');
+                return;
+            }
 
-        navigate('/AjoutCandidat');
+            setError('');
+
+            const { data } = await axios.get(`http://localhost:3000/candidature/user?email=${email}`);
+            const userId = data._id;
+
+            navigate(`/AjoutCandidat/${userId}`);
+        }catch(error){
+            console.log(error);
+            toast.error("Une erreur est survenue lors de l'inscription");
+        }
     };
 
     return (
@@ -62,7 +79,7 @@ const Homepage = () => {
                                 name="email" 
                                 // value={email} 
                                 onChange={handleEmailChange} 
-                                required 
+                                
                             />
                         </div>
 

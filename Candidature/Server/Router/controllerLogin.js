@@ -1,6 +1,5 @@
 
 import { Login } from "../models/modelLogin.js";
-import jwt from "jsonwebtoken";
 import ENV from "../config/env.js";
 
 // Inscription
@@ -10,13 +9,6 @@ export const inscription =  async (req, res) => {
 
         const user = await Login.create ({email, password});
         res.status(201).json({message: 'Utilisateur crée'});
-        res.cookie("userId", user._id, {
-            httpOnly: true,
-            secure: false,
-            maxAge: 24 * 60 * 60 * 1000
-        });
-
-        res.json({ message: 'Connexion reussie'});
     } catch (error) {
         res.status(500).json({error:error.message});
     }
@@ -31,12 +23,7 @@ export const connexion = async (req, res) => {
             return res.status(401).json("ça marche pas lol");
         }
 
-        if (user.password == password) {
-            jwt.sign({id: user._id, email: user.email, password : user.password}, ENV.JWT_SECRETS, {}, (err, token) => {
-            if (err) throw err;
-            res.cookie("token", token).json(user);
-        });
-        }
+
         res.json({ message: 'Connexion reussie'});
     }catch (error) {
         res.status(500).json({ error: error.message });
